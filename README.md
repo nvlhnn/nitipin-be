@@ -1,98 +1,140 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Nitipin — Backend API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+REST API backend for **Nitipin**, a peer-to-peer jastip (personal shopper) marketplace that connects travelers with shoppers. Built with [NestJS](https://nestjs.com/) and TypeScript.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tech Stack
 
-## Description
+| Layer | Technology |
+|---|---|
+| Framework | NestJS 11 |
+| Language | TypeScript 5 |
+| Database | PostgreSQL 16 |
+| ORM | TypeORM |
+| Auth | JWT + Passport |
+| Queue | BullMQ + Redis |
+| Realtime | Socket.IO (WebSockets) |
+| Scheduler | @nestjs/schedule |
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features / Modules
 
-## Project setup
+- **Auth** — Register, login, JWT access & refresh tokens
+- **User** — Profile management, onboarding
+- **Trip** — Travelers create & manage shopping trips
+- **Request** — Shoppers post item requests
+- **Offer** — Travelers make offers on requests
+- **Order** — Order lifecycle management
+- **Wallet** — Balance, top-up, withdrawal, transaction history
+- **Message** — Real-time chat between users (WebSocket)
+- **Notification** — In-app notifications
+- **Review** — Post-order ratings & reviews
+- **Dispute** — Order dispute resolution
+- **Upload** — File/image uploads
+- **Health** — Health check endpoint
 
-```bash
-$ npm install
-```
+## Prerequisites
 
-## Compile and run the project
+- **Node.js** ≥ 18
+- **PostgreSQL** 16+
+- **Redis** 7+
 
-```bash
-# development
-$ npm run start
+Or simply use Docker (see below).
 
-# watch mode
-$ npm run start:dev
+## Getting Started
 
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+### 1. Clone the repository
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/nvlhnn/nitipin-be.git
+cd nitipin-be
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Install dependencies
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Start infrastructure (PostgreSQL & Redis)
 
-## Resources
+```bash
+docker compose up -d
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+This starts:
+- **PostgreSQL** on port `5433` (mapped to container `5432`)
+- **Redis** on port `6379`
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 4. Configure environment
 
-## Support
+```bash
+cp .env.example .env
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Edit `.env` as needed. Key variables:
 
-## Stay in touch
+| Variable | Description | Default |
+|---|---|---|
+| `PORT` | Server port | `8080` |
+| `DATABASE_URL` | PostgreSQL connection string | `postgres://postgres:postgres@localhost:5433/nitipin` |
+| `JWT_SECRET` | Secret for signing JWTs | `change-me-in-production` |
+| `REDIS_HOST` | Redis host | `localhost` |
+| `REDIS_PORT` | Redis port | `6379` |
+| `PLATFORM_FEE_PERCENT` | Platform fee on transactions | `5.0` |
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 5. Run the server
 
-## License
+```bash
+# Development (watch mode)
+npm run start:dev
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Production
+npm run build
+npm run start:prod
+```
+
+The API will be available at `http://localhost:8080`.
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run start:dev` | Start in watch mode |
+| `npm run start:prod` | Start production build |
+| `npm run build` | Compile TypeScript |
+| `npm run test` | Run unit tests |
+| `npm run test:e2e` | Run E2E tests |
+| `npm run test:cov` | Test coverage report |
+| `npm run lint` | Lint & auto-fix |
+| `npm run format` | Format with Prettier |
+| `npm run migration:generate` | Generate a new migration |
+| `npm run migration:run` | Run pending migrations |
+| `npm run migration:revert` | Revert last migration |
+
+## Project Structure
+
+```
+src/
+├── common/          # Guards, decorators, interceptors, pipes
+├── database/        # Data source & migration config
+├── infrastructure/  # Cross-cutting concerns (Redis, queues, etc.)
+├── modules/
+│   ├── auth/        # Authentication & authorization
+│   ├── user/        # User profiles
+│   ├── trip/        # Trip management
+│   ├── request/     # Item requests
+│   ├── offer/       # Offers on requests
+│   ├── order/       # Order lifecycle
+│   ├── wallet/      # Wallet & transactions
+│   ├── message/     # Real-time messaging
+│   ├── notification/# Notifications
+│   ├── review/      # Reviews & ratings
+│   ├── dispute/     # Dispute handling
+│   ├── upload/      # File uploads
+│   └── health/      # Health check
+├── app.module.ts
+└── main.ts
+```
+
+## Related
+
+- **Frontend**: [nitipin-fe](https://github.com/nvlhnn/nitipin-fe)
